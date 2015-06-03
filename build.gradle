@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+ext {
+    buildNumber = System.getenv("GO_PIPELINE_COUNTER") ?: '0'
+    version = "0.0.${buildNumber}"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+sourceSets {
+    main {
+        output.resourcesDir = output.classesDir
+    }
+}
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '1.8'
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+ //   compile
+    testCompile 'junit:junit:latest.release',
+            'org.hamcrest:hamcrest-all:latest.release'
+}
+
+task copyResources << {
+    copy {
+        from 'src/test/java'
+        include '**/*.xml'
+        into sourceSets.test.output.classesDir
+    }
+}
+test.dependsOn copyResources
