@@ -7,6 +7,7 @@ int main(int argc, char* argv[]) {
         perror("Error cased, can not open file\n");
         return 1;
     }
+
     for (i = 1; i < 0xFF; i++) {
         char c[] = {i, '\0'};
         if (i % 50 == 0) {

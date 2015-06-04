@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
     const wchar_t ucs_s[] = L"真牛B啊";
 
     setlocale(LC_ALL, "");
+
     printf("length of %s is %d, and byte size is %ld\n", ascii_s, _strlen(ascii_s), sizeof(ascii_s));
     printf("length of %s is %d, and byte size is %ld\n", unicode_s, _strlen(unicode_s), sizeof(unicode_s));
     printf("length of %s is %d, and byte size is %ld\n", unicode_s, _mbslen(unicode_s), sizeof(unicode_s));
