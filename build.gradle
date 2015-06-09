@@ -53,12 +53,3 @@ dependencies {
     testCompile 'junit:junit:latest.release',
             'org.hamcrest:hamcrest-all:latest.release'
 }
-
-task copyResources << {
-    copy {
-        from 'src/test/java'
-        include '**/*.xml'
-        into sourceSets.test.output.classesDir
-    }
-}
-test.dependsOn copyResources

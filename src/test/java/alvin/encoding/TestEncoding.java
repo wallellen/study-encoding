@@ -2,6 +2,8 @@ package alvin.encoding;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
@@ -60,7 +62,33 @@ public class TestEncoding {
 
         String s = "TWFu";
         for (int i = 0; i < s.length(); i++) {
-            System.out.println(String.format("%x", (int)s.charAt(i)));
+            System.out.println(String.format("%x", (int) s.charAt(i)));
+        }
+    }
+
+    private boolean streamEquals(InputStream is1, InputStream is2) throws IOException {
+        int b1, b2;
+        do {
+            b1 = is1.read();
+            b2 = is2.read();
+            if (b1 != b2) {
+                return false;
+            }
+        } while (b1 >= 0 && b2 >= 0);
+        return true;
+    }
+
+    @Test
+    public void test_base64() throws Exception {
+        final byte[] srcData = Files.readAllBytes(Paths.get(getClass().getResource("/girl.jpg").toURI()));
+
+        Base64 base64 = new Base64();
+        String b64 = base64.encode(srcData);
+        byte[] decodeData = base64.decode(b64);
+
+        assertThat(decodeData.length, is(srcData.length));
+        for (int i = 0; i < decodeData.length; i++) {
+            assertThat(decodeData[i], is(srcData[i]));
         }
     }
 }
