@@ -66,18 +66,6 @@ public class TestEncoding {
         }
     }
 
-    private boolean streamEquals(InputStream is1, InputStream is2) throws IOException {
-        int b1, b2;
-        do {
-            b1 = is1.read();
-            b2 = is2.read();
-            if (b1 != b2) {
-                return false;
-            }
-        } while (b1 >= 0 && b2 >= 0);
-        return true;
-    }
-
     @Test
     public void test_base64() throws Exception {
         final byte[] srcData = Files.readAllBytes(Paths.get(getClass().getResource("/girl.jpg").toURI()));
