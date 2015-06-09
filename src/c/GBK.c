@@ -4,7 +4,7 @@ int main(int argc, char* argv[]) {
     int i, j;
     FILE* pf = fopen("GBK_table.txt", "wb");
     if (pf == NULL) {
-        perror("Error cased, can not open file\n");
+        perror("Error caused, can not open file\n");
         return 1;
     }
 
