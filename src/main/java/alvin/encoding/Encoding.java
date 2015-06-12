@@ -18,7 +18,7 @@ public class Encoding {
         return data;
     }
 
-    public String encode(byte[] data) {
+    public String decode(byte[] data) {
         return charset.decode(ByteBuffer.wrap(data)).toString();
     }
 }

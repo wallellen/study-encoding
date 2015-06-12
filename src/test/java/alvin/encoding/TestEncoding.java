@@ -2,8 +2,6 @@ package alvin.encoding;
 
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
@@ -20,7 +18,7 @@ public class TestEncoding {
         Encoding e = new Encoding("GBK");
 
         byte[] data = e.encode(text);
-        assertThat(text, is(e.encode(data)));
+        assertThat(text, is(e.decode(data)));
     }
 
     @Test
@@ -56,14 +54,8 @@ public class TestEncoding {
     @Test
     public void test_url_encoding() throws Exception {
         final String src = "编码";
-
         assertThat(RFC3986Encode(src.getBytes("UTF-8")), is(URLEncoder.encode(src, "UTF-8")));
         assertThat(URLDecoder.decode(RFC3986Encode(src.getBytes("UTF-8")), "UTF-8"), is(src));
-
-        String s = "TWFu";
-        for (int i = 0; i < s.length(); i++) {
-            System.out.println(String.format("%x", (int) s.charAt(i)));
-        }
     }
 
     @Test
